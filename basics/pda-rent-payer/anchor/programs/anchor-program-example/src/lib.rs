@@ -3,7 +3,7 @@ use anchor_lang::prelude::*;
 use instructions::*;
 pub mod instructions;
 
-declare_id!("7Hm9nsYVuBZ9rf8z9AMUHreZRv8Q4vLhqwdVTCawRZtA");
+declare_id!("3cBrupv5pfvzMtSQLYiVkUhajLnfRLXuaUN98TFEjZmC");
 
 #[program]
 pub mod pda_rent_payer {

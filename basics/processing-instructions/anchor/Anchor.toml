@@ -1,7 +1,7 @@
 [features]
 seeds = false
 [programs.localnet]
-processing_instructions = "DgoL5J44aspizyUs9fcnpGEUJjWTLJRCfx8eYtUMYczf"
+processing_instructions = "9A9AJ9BJwxL4ZFzBPepj11eSLwxzQRHRvAAfCqfmzoAN"
 
 [registry]
 url = "https://api.apr.dev"

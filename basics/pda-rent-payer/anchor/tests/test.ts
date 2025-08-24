@@ -1,7 +1,11 @@
 import * as anchor from '@coral-xyz/anchor';
+
 import { Keypair, LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js';
 import { assert } from 'chai';
 import type { PdaRentPayer } from '../target/types/pda_rent_payer';
+import BN from 'bn.js';
+
+// const { BN } = anchor.default;
 
 describe('PDA Rent-Payer', () => {
   const provider = anchor.AnchorProvider.env();
@@ -15,7 +19,7 @@ describe('PDA Rent-Payer', () => {
 
   it('Initialize the Rent Vault', async () => {
     // 1 SOL
-    const fundAmount = new anchor.BN(LAMPORTS_PER_SOL);
+    const fundAmount = new BN(LAMPORTS_PER_SOL);
 
     await program.methods
       .initRentVault(fundAmount)
