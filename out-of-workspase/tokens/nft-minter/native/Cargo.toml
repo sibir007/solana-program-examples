@@ -1,0 +1,18 @@
+cargo-features = ["edition2024"]
+[package]
+name = "nft-minter-native"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+borsh = "1.5.7"
+borsh-derive = "1.5.7"
+solana-program = "2.3.0"
+spl-token = { version="8.0.0", features = [ "no-entrypoint" ] }
+spl-associated-token-account = { version="7.0.0", features = [ "no-entrypoint" ] }
+mpl-token-metadata = { version="5.1.1" }
+base64ct = "=1.6.0" # for solving bug https://github.com/RustCrypto/formats/issues/1684?ysclid=meyexh01fn321241243
+solana-system-interface = "1.0.0"
+
+[lib]
+crate-type = ["cdylib", "lib"]

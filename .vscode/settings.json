@@ -1,0 +1,6 @@
+{
+    "rust-analyzer.linkedProjects": [
+        "./Cargo.toml",
+        "./out-of-workspase/tokens/nft-minter/native/Cargo.toml"
+    ]
+}
