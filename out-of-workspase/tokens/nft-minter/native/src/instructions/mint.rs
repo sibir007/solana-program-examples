@@ -29,7 +29,7 @@ pub fn mint_to(accounts: &[AccountInfo]) -> ProgramResult {
     let associated_token_account = next_account_info(accounts_iter)?;
     let payer = next_account_info(accounts_iter)?;
     let rent = next_account_info(accounts_iter)?;
-    let _system_program = next_account_info(accounts_iter)?;
+    let system_program = next_account_info(accounts_iter)?;
     let token_program = next_account_info(accounts_iter)?;
     let associated_token_program = next_account_info(accounts_iter)?;
     let token_metadata_program = next_account_info(accounts_iter)?;
@@ -80,25 +80,30 @@ pub fn mint_to(accounts: &[AccountInfo]) -> ProgramResult {
     //      which will disable minting by setting the Mint & Freeze Authorities to the
     //      Edition Account.
     //
-    
+
     CreateMasterEditionV3CpiBuilder::new(token_metadata_program)
-    .edition(&edition_account)
-    .mint(&mint_account)
-    .update_authority(&mint_authority)
-    .mint_authority(&mint_authority)
-        .metadata(&metadata_account)
-        .payer(&payer)
+        .edition(edition_account)
+        .mint(mint_account)
+        .update_authority(mint_authority)
+        .mint_authority(mint_authority)
+        .metadata(metadata_account)
+        .payer(payer)
         .max_supply(1)
+        .rent(Some(rent))
+        .system_program(system_program)
+        .token_program(token_program)
         .invoke()?;
 
     msg!("Creating edition account...");
     msg!("Edition account address: {}", edition_account.key);
+
+    // Old interface, does not work!!!!
     // invoke(
     //     &mpl_instruction::create_master_edition_v3(
-        //         *token_metadata_program.key, // Program ID
-        //         *edition_account.key,        // Edition
-        //         *mint_account.key,           // Mint
-        //         *mint_authority.key,         // Update Authority
+    //         *token_metadata_program.key, // Program ID
+    //         *edition_account.key,        // Edition
+    //         *mint_account.key,           // Mint
+    //         *mint_authority.key,         // Update Authority
     //         *mint_authority.key,         // Mint Authority
     //         *metadata_account.key,       // Metadata
     //         *payer.key,                  // Payer

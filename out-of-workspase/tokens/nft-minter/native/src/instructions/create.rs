@@ -1,15 +1,10 @@
-use mpl_token_metadata::instructions::{
-    CreateMetadataAccountV3Cpi,
-    CreateMetadataAccountV3CpiAccounts,
-    CreateMetadataAccountV3InstructionArgs,
-    CreateMetadataAccountV3CpiBuilder,
-                };
+use mpl_token_metadata::instructions::CreateMetadataAccountV3CpiBuilder;
 use mpl_token_metadata::types::DataV2;
 
 use {
     borsh::{BorshDeserialize, BorshSerialize},
     solana_program::{
-        account_info::{next_account_info, AccountInfo},
+        account_info::{AccountInfo, next_account_info},
         entrypoint::ProgramResult,
         msg,
         program::invoke,
@@ -88,11 +83,11 @@ pub fn create_token(accounts: &[AccountInfo], args: CreateTokenArgs) -> ProgramR
     msg!("Metadata account address: {}", metadata_account.key);
 
     CreateMetadataAccountV3CpiBuilder::new(token_metadata_program)
-        .metadata(&metadata_account)
-        .mint(&mint_account)
-        .mint_authority(&mint_authority)
-        .payer(&payer)
-        .update_authority(&mint_authority, true)
+        .metadata(metadata_account)
+        .mint(mint_account)
+        .mint_authority(mint_authority)
+        .payer(payer)
+        .update_authority(mint_authority, true)
         .data(DataV2 {
             name: args.nft_title,
             symbol: args.nft_symbol,
@@ -102,9 +97,10 @@ pub fn create_token(accounts: &[AccountInfo], args: CreateTokenArgs) -> ProgramR
             collection: None,
             uses: None,
         })
-        .rent(Some(&rent))
+        .rent(Some(rent))
+        .is_mutable(false)
+        .system_program(system_program)
         .invoke()?;
-    
 
     // invoke(
     //     &mpl_instruction::create_metadata_accounts_v3(

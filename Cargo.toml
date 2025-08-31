@@ -36,7 +36,9 @@ members = [
     "tokens/token-2022/transfer-fee/native/program",
     # "tokens/token-2022/multiple-extensions/native/program", "out-of-workspase/tokens/nft-minter/nativ", "out-of-workspase/tokens/nft-minter/native",
 ]
-exclude = ["out-of-workspase/tokens/nft-minter/native"]
+exclude = [
+    "out-of-workspase/tokens/nft-minter/native",
+    ]
 resolver = "2"
 
 [profile.release]

@@ -5,4 +5,5 @@
 # Run this bad boy with "bash cicd.sh" or "./cicd.sh"
 
 cargo build-sbf
-solana program deploy ./program/target/deploy/program.so
+solana config set -ud
+solana program deploy ./target/deploy/nft_minter_native.so
